@@ -1,7 +1,3 @@
-// require("dotenv").config({
-//   path: `.env.${process.env.NODE_ENV}`,
-// })
-
 module.exports = {
   siteMetadata: {
     title: `Gatsby Default Starter`,
@@ -39,7 +35,7 @@ module.exports = {
       resolve: 'gatsby-source-storyblok',
       options: {
         accessToken: 'NkoxFr0RJDvU6nujm347Ywtt',
-        version: 'draft',
+        version: process.env.NODE_ENV === 'production' ? 'published' : 'draft',
       }
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
