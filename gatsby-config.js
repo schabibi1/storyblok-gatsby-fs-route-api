@@ -39,7 +39,7 @@ module.exports = {
       resolve: 'gatsby-source-storyblok',
       options: {
         accessToken: 'NkoxFr0RJDvU6nujm347Ywtt',
-        version: 'draft',
+        version: process.env.NODE_ENV === 'production' ? 'published' : 'draft',
       }
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
