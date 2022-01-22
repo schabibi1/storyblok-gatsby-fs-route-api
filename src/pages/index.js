@@ -12,14 +12,16 @@ const IndexPage = ({ data, location }) => {
   let story = data.storyblokEntry
   story = useStoryblok(story, location)
 
-  const components = story.content.body.map((blok, index) => {
-    return <Fragment key={index}>{getBlok(blok)}</Fragment>
+  const components = story.content.body.map((blok) => {
+    return <Fragment key={blok._uid}>{getBlok(blok)}</Fragment>
   })
 
   return (
     <Layout>
       <div {...sbEditable(story.content)}>
         <Seo title="Home" />
+        <h1>{story.content.title}</h1>
+        {components}
         <StaticImage
           src="../images/gatsby-astronaut.png"
           width={300}
@@ -28,7 +30,6 @@ const IndexPage = ({ data, location }) => {
           alt="A Gatsby astronaut"
           style={{ marginBottom: `1.45rem` }}
         />
-        {components}
       </div>
     </Layout>
   )
