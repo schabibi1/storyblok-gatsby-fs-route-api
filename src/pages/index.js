@@ -1,9 +1,10 @@
-import React, { Fragment } from "react"
+import * as React from "react"
+
 import { StaticImage } from "gatsby-plugin-image"
 import { graphql } from "gatsby"
 import useStoryblok from "../lib/storyblok"
 import { sbEditable } from "@storyblok/storyblok-editable"
-import getBlok from "../lib/getBlok"
+import DynamicComponent from "../components/dynamicComponent"
 
 import Layout from "../components/layout"
 import Seo from "../components/seo"
@@ -12,8 +13,8 @@ const IndexPage = ({ data, location }) => {
   let story = data.storyblokEntry
   story = useStoryblok(story, location)
 
-  const components = story.content.body.map((blok) => {
-    return <Fragment key={blok._uid}>{getBlok(blok)}</Fragment>
+  const components = story.content.body.map(blok => {
+    return (<DynamicComponent blok={blok} key={blok._uid} />)
   })
 
   return (

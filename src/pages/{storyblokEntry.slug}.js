@@ -1,20 +1,25 @@
-import React, { Fragment } from 'react'
+import * as React from "react"
 import { graphql } from 'gatsby'
 import useStoryblok from "../lib/storyblok"
 import { sbEditable } from "@storyblok/storyblok-editable"
-import getBlok from "../lib/getBlok"
+import DynamicComponent from "../components/dynamicComponent"
+
+import Layout from "../components/layout"
 
 export default function StoryblokEntry({ data, location }) {
   let story = data.storyblokEntry
   story = useStoryblok(story, location)
-  console.log(story)
+
+  const components = story.content.body.map(blok => {
+    return (<DynamicComponent blok={blok} key={blok._uid} />)
+  })
 
   return (
-    <div {...sbEditable(story.content)}>
-      {story.content.body.map((blok, index) => {
-        return <Fragment key={index}>{getBlok(blok)}</Fragment>
-      })}
-    </div>
+    <Layout>
+      <div {...sbEditable(story.content)}>
+        {components}
+      </div>
+    </Layout>
   )
 }
 
