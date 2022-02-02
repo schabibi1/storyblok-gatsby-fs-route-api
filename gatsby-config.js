@@ -40,6 +40,7 @@ module.exports = {
       options: {
         accessToken: 'NkoxFr0RJDvU6nujm347Ywtt',
         version: process.env.NODE_ENV === 'production' ? 'published' : 'draft',
+        localAssets: true,
       }
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
